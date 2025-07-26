@@ -1,0 +1,834 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Your Adventure | Horizon Travels</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #0066ff;
+            --primary-dark: #0052cc;
+            --primary-light: rgba(0, 102, 255, 0.1);
+            --secondary: #ff6b6b;
+            --dark: #222;
+            --light: #f8f9fa;
+            --gray: #6c757d;
+            --light-gray: #e9ecef;
+            --transition: all 0.3s ease;
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 15px 40px rgba(0, 0, 0, 0.15);
+            --radius: 8px;
+            --radius-lg: 12px;
+        }
+
+        /* Base styles (same as previous pages) */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: var(--dark);
+            background-color: #fff;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 600;
+            line-height: 1.2;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            border-radius: var(--radius);
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-3px);
+            box-shadow: var(--shadow);
+        }
+
+        .btn-secondary {
+            background-color: var(--secondary);
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            opacity: 0.9;
+            transform: translateY(-3px);
+            box-shadow: var(--shadow);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            border: 2px solid white;
+            color: white;
+        }
+
+        .btn-outline:hover {
+            background-color: white;
+            color: var(--primary);
+        }
+
+        .section {
+            padding: 100px 0;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            text-align: center;
+            position: relative;
+        }
+
+        .section-title:after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background: var(--primary);
+            margin: 20px auto;
+            border-radius: 2px;
+        }
+
+        .section-subtitle {
+            color: var(--gray);
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 50px;
+            font-size: 1.1rem;
+        }
+
+        /* Header (same as previous pages) */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            transition: var(--transition);
+            padding: 20px 0;
+        }
+
+        header.scrolled {
+            background-color: rgba(255, 255, 255, 0.95);
+            box-shadow: var(--shadow);
+            padding: 15px 0;
+        }
+
+        header.scrolled .logo {
+            color: var(--primary);
+        }
+
+        header.scrolled .nav-link {
+            color: var(--dark);
+        }
+
+        header.scrolled .nav-link:hover {
+            color: var(--primary);
+        }
+
+        header.scrolled .btn-outline {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
+        header.scrolled .btn-outline:hover {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: white;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo i {
+            margin-right: 10px;
+            color: var(--secondary);
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-link {
+            margin: 0 15px;
+            font-weight: 500;
+            color: white;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .nav-link:hover {
+            color: var(--secondary);
+        }
+
+        .nav-link:after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--secondary);
+            transition: var(--transition);
+        }
+
+        .nav-link:hover:after {
+            width: 100%;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Page Header */
+        .page-header {
+            height: 400px;
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1506929562872-bb421503ef21?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1920&q=80') no-repeat center center/cover;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            color: white;
+            position: relative;
+        }
+
+        .page-header-content {
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .page-title {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            animation: fadeInUp 1s ease;
+        }
+
+        .breadcrumb {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .breadcrumb a {
+            color: white;
+            transition: var(--transition);
+        }
+
+        .breadcrumb a:hover {
+            color: var(--secondary);
+        }
+
+        .breadcrumb span {
+            margin: 0 10px;
+        }
+
+        /* Booking CTA Section */
+        .booking-cta {
+            text-align: center;
+            padding: 80px 0;
+        }
+
+        .booking-cta h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        .booking-cta p {
+            max-width: 700px;
+            margin: 0 auto 40px;
+            color: var(--gray);
+            font-size: 1.1rem;
+        }
+
+        .booking-btn {
+            font-size: 1.2rem;
+            padding: 15px 40px;
+            margin: 0 15px 20px;
+        }
+
+        .trust-badges {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .trust-badge {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .trust-badge i {
+            font-size: 1.5rem;
+            color: var(--primary);
+        }
+
+        /* Popular Tours */
+        .popular-tours {
+            background-color: var(--light);
+        }
+
+        .tours-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .tour-card {
+            background-color: white;
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .tour-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .tour-img {
+            height: 250px;
+            width: 100%;
+            object-fit: cover;
+        }
+
+        .tour-content {
+            padding: 25px;
+        }
+
+        .tour-title {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+
+        .tour-meta {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+
+        .tour-meta i {
+            margin-right: 5px;
+            color: var(--primary);
+        }
+
+        .tour-price {
+            color: var(--primary);
+            font-weight: 700;
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+        }
+
+        .tour-price span {
+            font-size: 0.9rem;
+            font-weight: 400;
+            color: var(--gray);
+        }
+
+        /* Why Book With Us */
+        .why-book {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .why-book:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 40%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--primary-light), transparent);
+            z-index: 1;
+        }
+
+        .why-book-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .why-book-img {
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-lg);
+            overflow: hidden;
+        }
+
+        .why-book-img img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .why-book-content h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        .benefits-list {
+            margin-top: 30px;
+        }
+
+        .benefit-item {
+            display: flex;
+            margin-bottom: 20px;
+            align-items: flex-start;
+        }
+
+        .benefit-icon {
+            flex-shrink: 0;
+            width: 50px;
+            height: 50px;
+            background-color: var(--primary-light);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 20px;
+            color: var(--primary);
+            font-size: 1.2rem;
+        }
+
+        .benefit-text h3 {
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 992px) {
+            .why-book-container {
+                grid-template-columns: 1fr;
+            }
+
+            .why-book:before {
+                width: 100%;
+                height: 40%;
+                top: auto;
+                bottom: 0;
+                background: linear-gradient(0deg, var(--primary-light), transparent);
+            }
+
+            .why-book-img {
+                max-width: 600px;
+                margin: 0 auto;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .page-title {
+                font-size: 2.8rem;
+            }
+
+            .booking-cta h2 {
+                font-size: 2rem;
+            }
+
+            .booking-btn {
+                display: block;
+                margin: 0 auto 20px;
+                width: 80%;
+                max-width: 300px;
+            }
+
+            .trust-badges {
+                flex-direction: column;
+                align-items: center;
+                gap: 20px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .page-header {
+                height: 350px;
+            }
+
+            .page-title {
+                font-size: 2.2rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .section {
+                padding: 70px 0;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+        }
+
+        .pulse:hover {
+            animation: pulse 1.5s infinite;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header id="header">
+        <div class="container header-container">
+            <a href="index.html" class="logo">
+                <i class="fas fa-globe-americas"></i>
+                Horizon
+            </a>
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+            <nav class="nav-links" id="navLinks">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="tours.html" class="nav-link">Tours</a>
+                <a href="destinations.html" class="nav-link">Destinations</a>
+                <a href="about.html" class="nav-link">About</a>
+                <a href="contact.html" class="nav-link">Contact</a>
+                <a href="book.html" class="btn btn-outline">Book Now</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="page-header-content">
+            <h1 class="page-title">Book Your Adventure</h1>
+            <div class="breadcrumb">
+                <a href="index.html">Home</a>
+                <span>/</span>
+                <a href="book.html">Book Now</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Booking CTA Section -->
+    <section class="section booking-cta">
+        <div class="container">
+            <h2>Ready for Your Next Adventure?</h2>
+            <p>
+                Secure your spot on one of our award-winning tours today. With flexible booking options and 24/7 support, planning your dream vacation has never been easier.
+            </p>
+            <div>
+                <a href="YOUR_BOOKING_LINK" class="btn btn-primary pulse booking-btn" target="_blank">
+                    <i class="fas fa-calendar-check"></i> Book Now
+                </a>
+                <a href="tours.html" class="btn btn-secondary booking-btn">
+                    <i class="fas fa-search"></i> Explore Tours
+                </a>
+            </div>
+            
+            <div class="trust-badges">
+                <div class="trust-badge">
+                    <i class="fas fa-shield-alt"></i>
+                    <span>Flexible Cancellation</span>
+                </div>
+                <div class="trust-badge">
+                    <i class="fas fa-headset"></i>
+                    <span>24/7 Support</span>
+                </div>
+                <div class="trust-badge">
+                    <i class="fas fa-award"></i>
+                    <span>Best Price Guarantee</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Popular Tours -->
+    <section class="section popular-tours">
+        <div class="container">
+            <h2 class="section-title">Featured Tours</h2>
+            <p class="section-subtitle">
+                These popular experiences are booking up fast - reserve your spot today
+            </p>
+            
+            <div class="tours-container">
+                <div class="tour-card">
+                    <img src="https://images.unsplash.com/photo-1503917988258-f87a78e3c995?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Italian Adventure" class="tour-img">
+                    <div class="tour-content">
+                        <h3 class="tour-title">Italian Adventure</h3>
+                        <div class="tour-meta">
+                            <span><i class="fas fa-calendar-alt"></i> 10 Days</span>
+                            <span><i class="fas fa-map-marker-alt"></i> Italy</span>
+                        </div>
+                        <div class="tour-price">$2,499 <span>per person</span></div>
+                        <a href="YOUR_BOOKING_LINK" class="btn btn-primary" target="_blank">Book This Tour</a>
+                    </div>
+                </div>
+                
+                <div class="tour-card">
+                    <img src="https://images.unsplash.com/photo-1523482580672-f109ba8cb9be?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Japanese Wonders" class="tour-img">
+                    <div class="tour-content">
+                        <h3 class="tour-title">Japanese Wonders</h3>
+                        <div class="tour-meta">
+                            <span><i class="fas fa-calendar-alt"></i> 14 Days</span>
+                            <span><i class="fas fa-map-marker-alt"></i> Japan</span>
+                        </div>
+                        <div class="tour-price">$3,299 <span>per person</span></div>
+                        <a href="YOUR_BOOKING_LINK" class="btn btn-primary" target="_blank">Book This Tour</a>
+                    </div>
+                </div>
+                
+                <div class="tour-card">
+                    <img src="https://images.unsplash.com/photo-1501594907352-04cda38ebc29?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="African Safari" class="tour-img">
+                    <div class="tour-content">
+                        <h3 class="tour-title">African Safari</h3>
+                        <div class="tour-meta">
+                            <span><i class="fas fa-calendar-alt"></i> 7 Days</span>
+                            <span><i class="fas fa-map-marker-alt"></i> Tanzania</span>
+                        </div>
+                        <div class="tour-price">$4,199 <span>per person</span></div>
+                        <a href="YOUR_BOOKING_LINK" class="btn btn-primary" target="_blank">Book This Tour</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center" style="margin-top: 50px;">
+                <a href="tours.html" class="btn btn-secondary">View All Tours</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Book With Us -->
+    <section class="section why-book">
+        <div class="container why-book-container">
+            <div class="why-book-img">
+                <img src="https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Why Book With Horizon Travels">
+            </div>
+            <div class="why-book-content">
+                <h2>Why Book With Horizon Travels?</h2>
+                <p>
+                    We're not just another travel company - we're your personal gateway to unforgettable experiences. Here's what sets us apart:
+                </p>
+                
+                <div class="benefits-list">
+                    <div class="benefit-item">
+                        <div class="benefit-icon">
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <div class="benefit-text">
+                            <h3>Expert Guides</h3>
+                            <p>Our handpicked guides are local experts who bring destinations to life with insider knowledge.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="benefit-item">
+                        <div class="benefit-icon">
+                            <i class="fas fa-heart"></i>
+                        </div>
+                        <div class="benefit-text">
+                            <h3>Personalized Service</h3>
+                            <p>We tailor every aspect of your journey to match your preferences and travel style.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="benefit-item">
+                        <div class="benefit-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <div class="benefit-text">
+                            <h3>Peace of Mind</h3>
+                            <p>Comprehensive travel protection and 24/7 support ensure you're always covered.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <a href="YOUR_BOOKING_LINK" class="btn btn-primary pulse" target="_blank" style="margin-top: 30px;">
+                    <i class="fas fa-calendar-check"></i> Book Your Adventure Now
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-container">
+                <div class="footer-col">
+                    <h3>About Horizon</h3>
+                    <p>
+                        Horizon Travels is a premier tour operator dedicated to creating unforgettable travel experiences 
+                        across the globe. Our passion for travel and commitment to excellence sets us apart.
+                    </p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="tours.html">Tours</a></li>
+                        <li><a href="destinations.html">Destinations</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Contact Info</h3>
+                    <p>
+                        <i class="fas fa-map-marker-alt"></i> 123 Travel Street, New York, NY 10001
+                    </p>
+                    <p>
+                        <i class="fas fa-phone"></i> +1 (555) 123-4567
+                    </p>
+                    <p>
+                        <i class="fas fa-envelope"></i> info@horizontravels.com
+                    </p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 Horizon Travels. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const navLinks = document.getElementById('navLinks');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            mobileMenuBtn.innerHTML = navLinks.classList.contains('active') 
+                ? '<i class="fas fa-times"></i>' 
+                : '<i class="fas fa-bars"></i>';
+        });
+
+        // Header Scroll Effect
+        const header = document.getElementById('header');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 100) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                    
+                    // Close mobile menu if open
+                    if (navLinks.classList.contains('active')) {
+                        navLinks.classList.remove('active');
+                        mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+                    }
+                }
+            });
+        });
+
+        // Replace all booking links with your actual booking URL
+        document.querySelectorAll('a[href="YOUR_BOOKING_LINK"]').forEach(link => {
+            link.addEventListener('click', function(e) {
+                // Optional: Add tracking or confirmation before redirect
+                console.log('Redirecting to booking system...');
+                // The actual redirect will happen via the href attribute
+            });
+        });
+    </script>
+</body>
+</html>
