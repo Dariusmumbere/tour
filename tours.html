@@ -26,7 +26,105 @@
         }
 
         /* Base styles from homepage... */
-        /* (Include all base styles from the homepage here) */
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            transition: var(--transition);
+            padding: 20px 0;
+        }
+
+        header.scrolled {
+            background-color: rgba(255, 255, 255, 0.95);
+            box-shadow: var(--shadow);
+            padding: 15px 0;
+        }
+
+        header.scrolled .logo {
+            color: var(--primary);
+        }
+
+        header.scrolled .nav-link {
+            color: var(--dark);
+        }
+
+        header.scrolled .nav-link:hover {
+            color: var(--primary);
+        }
+
+        header.scrolled .btn-outline {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
+        header.scrolled .btn-outline:hover {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: white;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo i {
+            margin-right: 10px;
+            color: var(--secondary);
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-link {
+            margin: 0 15px;
+            font-weight: 500;
+            color: white;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .nav-link:hover {
+            color: var(--secondary);
+        }
+
+        .nav-link:after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--secondary);
+            transition: var(--transition);
+        }
+
+        .nav-link:hover:after {
+            width: 100%;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
 
         /* Tours Page Specific Styles */
         .page-header {
